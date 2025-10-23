@@ -210,7 +210,7 @@ services:
       PENPOT_REDIS_URI: redis://penpot-valkey/0
 
   penpot-postgres:
-    image: "postgres:15"
+    image: "postgres:18"
     restart: always
     stop_signal: SIGINT
 
