@@ -1,32 +1,9 @@
 # @see https://github.com/paperless-ngx/paperless-ngx
 #
-# All compose files of paperless configure paperless in the following way:
-#
-# - Paperless is (re)started on system boot, if it was running before shutdown.
-# - Docker volumes for storing data are managed by Docker.
-# - Folders for importing and exporting files are created in the same directory
-#   as this file and mounted to the correct folders inside the container.
-# - Paperless listens on port 8000.
-#
 # SQLite is used as the database. The SQLite file is stored in the data volume.
 #
-# In addition to that, this Docker Compose file adds the following optional
-# configurations:
-#
-# - Apache Tika and Gotenberg servers are started with paperless and paperless
-#   is configured to use these services. These provide support for consuming
-#   Office documents (Word, Excel, Power Point and their LibreOffice counter-
-#   parts.
-#
-# To install and update paperless with this file, do the following:
-#
-# - Copy this file as 'docker-compose.yml' and the files 'docker-compose.env'
-#   and '.env' into a folder.
 # - Run 'docker compose pull'.
 # - Run 'docker compose up -d'.
-#
-# For more extensive installation and update instructions, refer to the
-# documentation.
 
 services:
   
@@ -46,10 +23,10 @@ services:
     ports:
       - 3010:8000
     volumes:
-      - ../_protected/paperless/db/data:/usr/src/paperless/data
-      - ../_protected/paperless/db/media:/usr/src/paperless/media
-      - ../_protected/paperless/export:/usr/src/paperless/export
-      - ../_protected/paperless/consume:/usr/src/paperless/consume
+      - paperless_data:/usr/src/paperless/data
+      - paperless_media:/usr/src/paperless/media
+      - paperless_export:/usr/src/paperless/export
+      - paperless_consume:/usr/src/paperless/consume
     env_file: docker-compose.env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
@@ -75,3 +52,27 @@ volumes:
   data:
   media:
   redisdata:
+  paperless_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/mnt/usb-Seagate_One_Touch_Hub_00000000NAC9573Z-0:0-part1/Paperless/db/data"
+  paperless_media:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/mnt/usb-Seagate_One_Touch_Hub_00000000NAC9573Z-0:0-part1/Paperless/db/media"
+  paperless_export:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/mnt/usb-Seagate_One_Touch_Hub_00000000NAC9573Z-0:0-part1/Paperless/export"
+  paperless_consume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/mnt/usb-Seagate_One_Touch_Hub_00000000NAC9573Z-0:0-part1/Paperless/consume"
