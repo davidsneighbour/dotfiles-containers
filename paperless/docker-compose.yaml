@@ -57,22 +57,22 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: "/mnt/usb-Seagate_One_Touch_Hub_00000000NAC9573Z-0:0-part1/Paperless/db/data"
+      device: "/mnt/storage/Paperless/db/data"
   paperless_media:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: "/mnt/usb-Seagate_One_Touch_Hub_00000000NAC9573Z-0:0-part1/Paperless/db/media"
+      device: "/mnt/storage/Paperless/db/media"
   paperless_export:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: "/mnt/usb-Seagate_One_Touch_Hub_00000000NAC9573Z-0:0-part1/Paperless/export"
+      device: "/mnt/storage/Paperless/export"
   paperless_consume:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: "/mnt/usb-Seagate_One_Touch_Hub_00000000NAC9573Z-0:0-part1/Paperless/consume"
+      device: "/mnt/storage/Paperless/consume"
